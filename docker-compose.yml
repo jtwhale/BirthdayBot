@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+  core:
+    build: ./
+    restart: unless-stopped
+    environment:
+      # Generate a bot token and put it here. The init.sh script will output the link to invite the bot to your server.
+      BOTTOKEN: '<bot token here>'
+      DBHOST: 'db'
+      DBNAME: 'birthdays'
+      DBUSER: 'birthdaybot'
+      DBPASSWORD: '<postgresql password here>'
+    links:
+      - "db"
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: 'birthdays'
+      POSTGRES_USER: 'birthdaybot'
+      POSTGRES_PASSWORD: '<postgresql password here>'
+    volumes:
+      # using a docker volume, see also the volumes: section
+      - birthdaybot-db:/var/lib/postgresql/data
+      # using a host mapping
+      # - /path/to/postgres/data:/var/lib/postgresql/data
+
+volumes:
+  birthdaybot-db:
