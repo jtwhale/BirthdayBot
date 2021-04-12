@@ -23,8 +23,9 @@ services:
     volumes:
       # using a docker volume, see also the volumes: section
       - birthdaybot-db:/var/lib/postgresql/data
-      # using a host mapping
+      # using a host mapping - uncomment the below line and comment out the top level volumes: section if using a host mapping
       # - /path/to/postgres/data:/var/lib/postgresql/data
 
+# named volumes definition. Comment out or remove the below two lines if using a host mapping.
 volumes:
   birthdaybot-db:
